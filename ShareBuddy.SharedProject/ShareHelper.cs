@@ -57,10 +57,11 @@ namespace ShareBuddy
 				{
 					var viewController = Game.Services.GetService<UIViewController>();
 
-					var image = new UIImage(path);
-					NSObject[] activityItems = { image };
+					var file = NSFileManager.DefaultManager.Contents(path);
+					var tempUrl = NSUrl.CreateFileUrl(new string[] { path });
+					var itemsToShare = new NSObject[] { tempUrl, new NSString(extratxt) };
 
-					UIActivityViewController activityViewController = new UIActivityViewController(activityItems, null);
+					UIActivityViewController activityViewController = new UIActivityViewController(itemsToShare, null);
 					activityViewController.ExcludedActivityTypes = new NSString[] { };
 
 					if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
