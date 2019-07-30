@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using ToastBuddyLib;
+using System.Threading.Tasks;
 #if ANDROID
 using Uri = Android.Net.Uri;
 using Android.App;
@@ -27,7 +28,7 @@ namespace ShareBuddy
 		/// Shares an image using the preferred method in Android or iOS.
 		///
 		/// Path.
-		public void ShareImage(string path, string extratxt = "")
+		public async Task ShareImage(string path, string extratxt = "")
 		{
 			try
 			{
@@ -80,8 +81,10 @@ namespace ShareBuddy
 			catch (Exception ex)
 			{
 				var messageDisplay = Game.Services.GetService<IToastBuddy>();
-				messageDisplay.ShowMessage($"Error sharing image:", Color.Yellow);
-				messageDisplay.ShowMessage(ex.Message, Color.Yellow);
+				messageDisplay.ShowMessage($"Error sharing image", Color.Yellow);
+
+				var screenManager = Game.Services.GetService<IScreenManager>();
+				await screenManager.AddScreen(new OkScreen(ex.Message));
 			}
 		}
 	}
