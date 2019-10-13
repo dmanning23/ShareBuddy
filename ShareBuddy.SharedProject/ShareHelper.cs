@@ -60,7 +60,7 @@ namespace ShareBuddy
 
 					var file = NSFileManager.DefaultManager.Contents(path);
 					var tempUrl = NSUrl.CreateFileUrl(new string[] { path });
-					var itemsToShare = new NSObject[] { tempUrl, new NSString(extratxt) };
+					var itemsToShare = new NSObject[] { tempUrl };
 
 					UIActivityViewController activityViewController = new UIActivityViewController(itemsToShare, null);
 					activityViewController.ExcludedActivityTypes = new NSString[] { };
