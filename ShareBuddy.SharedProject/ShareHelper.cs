@@ -49,7 +49,9 @@ namespace ShareBuddy
 				shareIntent.AddFlags(ActivityFlags.GrantReadUriPermission | ActivityFlags.NewTask);
 
 				// Now Send the Share Intent
-				CrossCurrentActivity.Current.AppContext.StartActivity(Intent.CreateChooser(shareIntent, "Choose one"));
+				var chooserIntent = Intent.CreateChooser(shareIntent, "Choose one");
+				chooserIntent.AddFlags(ActivityFlags.GrantReadUriPermission | ActivityFlags.NewTask);
+				CrossCurrentActivity.Current.AppContext.StartActivity(chooserIntent);
 
 				//// Now Send the Share Intent
 				//Application.Context.StartActivity(Intent.CreateChooser(shareIntent, "Choose one"));
